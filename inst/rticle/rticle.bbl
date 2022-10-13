@@ -1,0 +1,262 @@
+\begin{thebibliography}{39}
+\newcommand{\enquote}[1]{``#1''}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Barabesi and Franceschi(2011)}]{barabesi2011sampling}
+Barabesi L, Franceschi S (2011).
+\newblock \enquote{Sampling Properties of Spatial Total Estimators Under
+  Tessellation Stratified Designs.}
+\newblock \emph{Environmetrics}, \textbf{22}(3), 271--278.
+
+\bibitem[{Benedetti and Piersimoni(2017)}]{benedetti2017spatially}
+Benedetti R, Piersimoni F (2017).
+\newblock \enquote{A Spatially Balanced Design with Probability Function
+  Proportional to the Within Sample Distance.}
+\newblock \emph{Biometrical Journal}, \textbf{59}(5), 1067--1084.
+
+\bibitem[{Benedetti \emph{et~al.}(2017)Benedetti, Piersimoni, and
+  Postiglione}]{benedetti2017spatiallyreview}
+Benedetti R, Piersimoni F, Postiglione P (2017).
+\newblock \enquote{Spatially Balanced Sampling: A Review and a Reappraisal.}
+\newblock \emph{International Statistical Review}, \textbf{85}(3), 439--454.
+
+\bibitem[{Brewer(2002)}]{brewer2002combined}
+Brewer K (2002).
+\newblock \emph{Combined Survey Sampling Inference: Weighing Basu's Elephants}.
+\newblock Oxford University Press.
+
+\bibitem[{Cordy(1993)}]{cordy1993extension}
+Cordy CB (1993).
+\newblock \enquote{An Extension of the Horvitz—Thompson Theorem to Point
+  Sampling from a Continuous Universe.}
+\newblock \emph{Statistics \& Probability Letters}, \textbf{18}(5), 353--362.
+
+\bibitem[{Foster(2021)}]{foster2021mbhdesign}
+Foster SD (2021).
+\newblock \enquote{MBHdesign: an R-package for efficient spatial survey
+  designs.}
+\newblock \emph{Methods in Ecology and Evolution}, \textbf{12}(3), 415--420.
+
+\bibitem[{Foster \emph{et~al.}(2017)Foster, Hosack, Lawrence, Przeslawski,
+  Hedge, Caley, Barrett, Williams, Li, Lynch
+  \emph{et~al.}}]{foster2017spatially}
+Foster SD, Hosack GR, Lawrence E, Przeslawski R, Hedge P, Caley MJ, Barrett NS,
+  Williams A, Li J, Lynch T, \emph{et~al.} (2017).
+\newblock \enquote{Spatially Balanced Designs that Incorporate Legacy Sites.}
+\newblock \emph{Methods in Ecology and Evolution}, \textbf{8}(11), 1433--1442.
+
+\bibitem[{Foster \emph{et~al.}(2020)Foster, Hosack, Monk, Lawrence, Barrett,
+  Williams, and Przeslawski}]{foster2020spatially}
+Foster SD, Hosack GR, Monk J, Lawrence E, Barrett NS, Williams A, Przeslawski R
+  (2020).
+\newblock \enquote{Spatially balanced designs for transect-based surveys.}
+\newblock \emph{Methods in Ecology and Evolution}, \textbf{11}(1), 95--105.
+
+\bibitem[{Grafstr{\"o}m(2012)}]{grafstrom2012spatiallypoisson}
+Grafstr{\"o}m A (2012).
+\newblock \enquote{Spatially Correlated Poisson Sampling.}
+\newblock \emph{Journal of Statistical Planning and Inference},
+  \textbf{142}(1), 139--147.
+
+\bibitem[{Grafstr{\"o}m and Lisic(2019)}]{grafstrom2019BalancedSampling}
+Grafstr{\"o}m A, Lisic J (2019).
+\newblock \emph{\pkg{BalancedSampling}: Balanced and Spatially Balanced
+  Sampling}.
+\newblock \proglang{R} package version 1.5.5,
+  \urlprefix\url{https://CRAN.R-project.org/package=BalancedSampling}.
+
+\bibitem[{Grafstr{\"o}m and Lundstr{\"o}m(2013)}]{grafstrom2013well}
+Grafstr{\"o}m A, Lundstr{\"o}m NL (2013).
+\newblock \enquote{Why Well Spread Probability Samples are Balanced.}
+\newblock \emph{Open Journal of Statistics}, \textbf{3}(1), 36--41.
+
+\bibitem[{Grafstr{\"o}m \emph{et~al.}(2012)Grafstr{\"o}m, Lundstr{\"o}m, and
+  Schelin}]{grafstrom2012spatially}
+Grafstr{\"o}m A, Lundstr{\"o}m NL, Schelin L (2012).
+\newblock \enquote{Spatially Balanced Sampling Through the Pivotal Method.}
+\newblock \emph{Biometrics}, \textbf{68}(2), 514--520.
+
+\bibitem[{Grafstr{\"o}m and Matei(2018)}]{grafstrom2018spatially}
+Grafstr{\"o}m A, Matei A (2018).
+\newblock \enquote{Spatially Balanced Sampling of Continuous Populations.}
+\newblock \emph{Scandinavian Journal of Statistics}, \textbf{45}(3), 792--805.
+
+\bibitem[{Hartley and Rao(1962)}]{hartley1962sampling}
+Hartley H, Rao J (1962).
+\newblock \enquote{Sampling with Unequal Probabilities and Without
+  Replacement.}
+\newblock \emph{The Annals of Mathematical Statistics}, \textbf{33}(2),
+  350--374.
+
+\bibitem[{Horvitz and Thompson(1952)}]{horvitz1952generalization}
+Horvitz DG, Thompson DJ (1952).
+\newblock \enquote{A Generalization of Sampling Without Replacement From a
+  Finite Universe.}
+\newblock \emph{Journal of the American Statistical Association},
+  \textbf{47}(260), 663--685.
+
+\bibitem[{Kruskal and
+  Mosteller(1979{\natexlab{a}})}]{kruskal1979representativea}
+Kruskal W, Mosteller F (1979{\natexlab{a}}).
+\newblock \enquote{Representative Sampling, I: Non-Scientific Literature.}
+\newblock \emph{International Statistical Review/Revue Internationale de
+  Statistique}, pp. 13--24.
+
+\bibitem[{Kruskal and
+  Mosteller(1979{\natexlab{b}})}]{kruskal1979representativeb}
+Kruskal W, Mosteller F (1979{\natexlab{b}}).
+\newblock \enquote{Representative Sampling, II: Scientific Literature,
+  Excluding Statistics.}
+\newblock \emph{International Statistical Review/Revue Internationale de
+  Statistique}, pp. 111--127.
+
+\bibitem[{Kruskal and
+  Mosteller(1979{\natexlab{c}})}]{kruskal1979representativec}
+Kruskal W, Mosteller F (1979{\natexlab{c}}).
+\newblock \enquote{Representative Sampling, III: The Current Statistical
+  Literature.}
+\newblock \emph{International Statistical Review/Revue Internationale de
+  Statistique}, pp. 245--265.
+
+\bibitem[{Lohr(2009)}]{lohr2009sampling}
+Lohr SL (2009).
+\newblock \emph{Sampling: Design and Analysis}.
+\newblock Nelson Education.
+
+\bibitem[{Lumley(2020)}]{lumley2020survey}
+Lumley T (2020).
+\newblock \emph{\pkg{survey}: Analysis of Complex Survey Samples}.
+\newblock \proglang{R} package version 4.0,
+  \urlprefix\url{https://CRAN.R-project.org/package=survey}.
+
+\bibitem[{McDonald and McDonald(2020)}]{mcdonald2020SDraw}
+McDonald T, McDonald A (2020).
+\newblock \emph{\pkg{SDraw}: Spatially Balanced Samples of Spatial Objects}.
+\newblock \proglang{R} package version 2.1.13,
+  \urlprefix\url{https://CRAN.R-project.org/package=SDraw}.
+
+\bibitem[{Overton(1987)}]{overton1987sampling}
+Overton W (1987).
+\newblock \enquote{A Sampling and Analysis Plan for Streams in the National
+  Surface Water Survey.}
+\newblock \emph{Dept. of Statistics, Oregon State Univ., Corvallis, Oregon}.
+
+\bibitem[{Pantalone \emph{et~al.}(2022)Pantalone, Benedetti, and
+  Piersimoni}]{pantalone2022spbsampling}
+Pantalone F, Benedetti R, Piersimoni F (2022).
+\newblock \enquote{Spbsampling: An R Package for Spatially Balanced Sampling.}
+\newblock \emph{Journal of Statistical Software}, \textbf{103}, 1--22.
+
+\bibitem[{Pebesma(2018)}]{pebesma2018sf}
+Pebesma E (2018).
+\newblock \enquote{{Simple Features for \proglang{R}: Standardized Support for
+  Spatial Vector Data}.}
+\newblock \emph{{The R Journal}}, \textbf{10}(1), 439--446.
+\newblock \doi{10.32614/RJ-2018-009}.
+\newblock \urlprefix\url{https://doi.org/10.32614/RJ-2018-009}.
+
+\bibitem[{Pielou(1966)}]{pielou1966measurement}
+Pielou EC (1966).
+\newblock \enquote{The Measurement of Diversity in Different Types of
+  Biological Collections.}
+\newblock \emph{Journal of Theoretical Biology}, \textbf{13}, 131--144.
+
+\bibitem[{Piepho and Ogutu(2002)}]{piepho2002simple}
+Piepho HP, Ogutu JO (2002).
+\newblock \enquote{A Simple Mixed Model for Trend Analysis in Wildlife
+  Populations.}
+\newblock \emph{Journal of Agricultural, Biological, and Environmental
+  Statistics}, \textbf{7}(3), 350--360.
+
+\bibitem[{Robertson \emph{et~al.}(2013)Robertson, Brown, McDonald, and
+  Jaksons}]{robertson2013bas}
+Robertson B, Brown J, McDonald T, Jaksons P (2013).
+\newblock \enquote{BAS: Balanced Acceptance Sampling of Natural Resources.}
+\newblock \emph{Biometrics}, \textbf{69}(3), 776--784.
+
+\bibitem[{Robertson \emph{et~al.}(2018)Robertson, McDonald, Price, and
+  Brown}]{robertson2018halton}
+Robertson B, McDonald T, Price C, Brown J (2018).
+\newblock \enquote{Halton Iterative Partitioning: Spatially Balanced Sampling
+  via Partitioning.}
+\newblock \emph{Environmental and Ecological Statistics}, \textbf{25}(3),
+  305--323.
+
+\bibitem[{S{\"a}rndal \emph{et~al.}(2003)S{\"a}rndal, Swensson, and
+  Wretman}]{sarndal2003model}
+S{\"a}rndal CE, Swensson B, Wretman J (2003).
+\newblock \emph{Model Assisted Survey Sampling}.
+\newblock Springer-Verlag.
+
+\bibitem[{Sen(1953)}]{sen1953estimate}
+Sen AR (1953).
+\newblock \enquote{On the Estimate of the Variance in Sampling with Varying
+  Probabilities.}
+\newblock \emph{Journal of the Indian Society of Agricultural Statistics},
+  \textbf{5}(1194), 127.
+
+\bibitem[{Shannon(1948)}]{shannon1948mathematical}
+Shannon CE (1948).
+\newblock \enquote{A Mathematical Theory of Communication.}
+\newblock \emph{The Bell System Technical Journal}, \textbf{27}(3), 379--423.
+
+\bibitem[{Stevens and Olsen(2004)}]{stevens2004grts}
+Stevens D, Olsen A (2004).
+\newblock \enquote{Spatially Balanced Sampling of Natural Resources.}
+\newblock \emph{Journal of the American Statistical Association},
+  \textbf{99}(465), 262--278.
+
+\bibitem[{Stevens~Jr and Olsen(2003)}]{stevens2003variance}
+Stevens~Jr DL, Olsen AR (2003).
+\newblock \enquote{Variance Estimation for Spatially Balanced Samples of
+  Environmental Resources.}
+\newblock \emph{Environmetrics}, \textbf{14}(6), 593--610.
+
+\bibitem[{Urquhart and Kincaid(1999)}]{urquhart1999designs}
+Urquhart NS, Kincaid TM (1999).
+\newblock \enquote{Designs for Detecting Trend From Repeated Surveys of
+  Ecological Resources.}
+\newblock \emph{Journal of Agricultural, Biological, and Environmental
+  Statistics}, pp. 404--414.
+
+\bibitem[{USEPA(2017)}]{usepa2012NLA}
+USEPA (2017).
+\newblock \enquote{National Lakes Assessment 2012: Technical Report.}
+\newblock \emph{The Office of Water and The Office of Research and Development,
+  Washington, D.C.}, pp. EPA841--R--16--114.
+
+\bibitem[{Van~Sickle and Paulsen(2008)}]{sickle2008assessing}
+Van~Sickle J, Paulsen SG (2008).
+\newblock \enquote{Assessing the Attributable Risks, Relative Risks, and
+  Regional Extents of Aquatic Stressors.}
+\newblock \emph{Journal of the North American Benthological Society},
+  \textbf{27}(4), 920--931.
+
+\bibitem[{Walvoort \emph{et~al.}(2010)Walvoort, Brus, and
+  De~Gruijter}]{walvoort2010r}
+Walvoort DJ, Brus D, De~Gruijter J (2010).
+\newblock \enquote{An R package for spatial coverage sampling and random
+  sampling from compact geographical strata by k-means.}
+\newblock \emph{Computers \& geosciences}, \textbf{36}(10), 1261--1267.
+
+\bibitem[{Wang \emph{et~al.}(2013)Wang, Jiang, Hu, Cao, Guo, Li, Liu, and
+  Meng}]{wang2013design}
+Wang JF, Jiang CS, Hu MG, Cao ZD, Guo YS, Li LF, Liu TJ, Meng B (2013).
+\newblock \enquote{Design-Based Spatial Sampling: Theory and Implementation.}
+\newblock \emph{Environmental Modelling \& Software}, \textbf{40}, 280--288.
+
+\bibitem[{Yates and Grundy(1953)}]{yates1953selection}
+Yates F, Grundy PM (1953).
+\newblock \enquote{Selection Without Replacement From Within Strata with
+  Probability Proportional to Size.}
+\newblock \emph{Journal of the Royal Statistical Society B}, \textbf{15}(2),
+  253--261.
+
+\end{thebibliography}

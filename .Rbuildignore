@@ -1,0 +1,5 @@
+^spsurvey.manuscript\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^inst/output/cat_results\.csv$
+^inst/output/cont_results\.csv$
