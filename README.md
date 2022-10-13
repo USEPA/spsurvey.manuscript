@@ -84,3 +84,7 @@ There are two `.csv` files:
 2. `cont_summaries.csv`: Contains the summary output for the BMMI simulations
 
 Raw simulation output for the Atrazine presence simulations is not included in the package installation but is available [here](https://github.com/USEPA/spsurvey.manuscript/blob/main/inst/output/cat_results.csv). Raw simulation output for the BMMI simulations is not included in the package installation but is available [here](https://github.com/USEPA/spsurvey.manuscript/blob/main/inst/output/cont_results.csv).
+
+### Disclaimer
+
+The views expressed in this manuscript are those of the authors and do not necessarily represent the views or policies of the U.S. Environmental Protection Agency. Any mention of trade names, products, or services does not imply an endorsement by the U.S. government or the U.S. Environmental Protection Agency. The U.S. Environmental Protection Agency does not endorse any commercial products, services, or enterprises.

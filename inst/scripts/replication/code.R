@@ -19,7 +19,7 @@
 #' ---
 #' 
 #' 
-## ----setup, include=FALSE-----------------------------------------------------------------------------------------------------------
+## ----setup, include=FALSE------------------------------------------------------------------------
 knitr::opts_chunk$set(
   echo = TRUE,
   eval = TRUE,
@@ -35,7 +35,7 @@ knitr::opts_chunk$set(
 #' 
 #' This document contains the replication script for "spsurvey: spatial sampling design and analysis in R" for consideration of publication in the Journal of Statistical Software (JSS). As per the JSS author guidelines, the replication script contains exact code used to reproduce the manuscript. You must install the development version of spsurvey considered in this submission by installing the tarball provided alongside the submission or by running
 #' 
-## ----eval = FALSE-------------------------------------------------------------------------------------------------------------------
+## ----eval = FALSE--------------------------------------------------------------------------------
 ## ## install.packages("remotes") # if needed
 ## ## remotes::install_github("USEPA/spsurvey", ref = "develop")
 
@@ -43,21 +43,21 @@ knitr::opts_chunk$set(
 #' 
 #' Data and scripts used to create the manuscript itself are available in a supplementary R package that can be downloaded by installing the tarball provided alongside the submission or by running
 #' 
-## ----eval = FALSE-------------------------------------------------------------------------------------------------------------------
-## ## remotes::install_github("michaeldumelle/DumelleEtAl2021spsurvey", ref = "main", dependencies = TRUE)
+## ----eval = FALSE--------------------------------------------------------------------------------
+## ## remotes::install_github("USEPA/spsurvey.manuscript", ref = "main", dependencies = TRUE)
 
 #' 
-#' The supplementary R package must be installed before proceeding with the Section 4 (Application) of the replication script. Instructions for using and finding files in the supplementary R package are available in the `README` of the package's GitHub repository: [https://github.com/michaeldumelle/DumelleEtAl2021spsurvey](https://github.com/michaeldumelle/DumelleEtAl2021spsurvey). It is recommended read the `README` before proceeding with this file, as the `README` contains some useful contextual information. Note that some of the images used in the manuscript underwent minor adjustments to code presented here in order to use high-quality, publication-ready figures in the manuscript. The code used to generate these higher-quality images is available after downloading the supplementary package. The code used to generate lower-quality images is provided in this document.
+#' The supplementary R package must be installed before proceeding with the Section 4 (Application) of the replication script. Instructions for using and finding files in the supplementary R package are available in the `README` of the package's GitHub repository: [https://github.com/USEPA/spsurvey.manuscript](https://github.com/USEPA/spsurvey.manuscript). It is recommended read the `README` before proceeding with this file, as the `README` contains some useful contextual information. Note that some of the images used in the manuscript underwent minor adjustments to code presented here in order to use high-quality, publication-ready figures in the manuscript. The code used to generate these higher-quality images is available after downloading the supplementary package. The code used to generate lower-quality images is provided in this document.
 #' 
-#' This document can be viewed without requiring you save and knit it by visiting a pre-knitted Markdown file located in the supplementary package's GitHub repository at [https://github.com/michaeldumelle/DumelleEtAl2021spsurvey/blob/main/inst/scripts/replication/code.md](https://github.com/michaeldumelle/DumelleEtAl2021spsurvey/blob/main/inst/scripts/replication/code.md). This is helpful in the event that some version discrepancy prevents you from compiling the document.
+#' This document can be viewed without requiring you save and knit it by visiting a pre-knitted Markdown file located in the supplementary package's GitHub repository at [https://github.com/USEPA/spsurvey.manuscript/blob/main/inst/scripts/replication/code.md](https://github.com/USEPA/spsurvey.manuscript/blob/main/inst/scripts/replication/code.md). This is helpful in the event that some version discrepancy prevents you from compiling the document.
 #' 
-#' Before proceeding, load spsurvey and the packages installed alongside the DumelleEtAl2021spsurvey package.
+#' Before proceeding, load spsurvey and the packages installed alongside the spsurvey.manuscript package.
 #' 
-## ----warning = FALSE, message = FALSE-----------------------------------------------------------------------------------------------
+## ----warning = FALSE, message = FALSE------------------------------------------------------------
 library("spsurvey")
 library("cowplot")
 library("dplyr")
-library("DumelleEtAl2021spsurvey")
+library("spsurvey.manuscript")
 library("ggplot2")
 library("knitr")
 library("maps")
@@ -69,7 +69,7 @@ library("parallel")
 #' 
 #' We will also load a reproducible seed (chosen as 5 because the original submission coincided version 5.0 of spsurvey) by running
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 set.seed(5)
 
 #' 
@@ -86,28 +86,28 @@ set.seed(5)
 #' 
 #' To load the `NE_Lakes` data from spsurvey into the global environment, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 data("NE_Lakes")
 
 #' 
 #' 
 #' To make `NE_Lakes` an `sp_frame` object, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 NE_Lakes <- sp_frame(NE_Lakes)
 
 #' 
 #' 
 #' To summarize lakes by elevation category, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 summary(NE_Lakes, formula = ~ ELEV_CAT)
 
 #' 
 #' 
 #' To visualize lakes by elevation category, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 plot(NE_Lakes, formula = ~ ELEV_CAT, key.width = lcm(3))
 
 #' 
@@ -116,14 +116,14 @@ plot(NE_Lakes, formula = ~ ELEV_CAT, key.width = lcm(3))
 #' 
 #' To summarize lakes by elevation category and the interaction between elevation category and area category, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 summary(NE_Lakes, formula = ~ ELEV_CAT + ELEV_CAT:AREA_CAT)
 
 #' 
 #' 
 #' To visualize lakes by elevation category and the interaction between elevation category and area category (figure 1 in the manuscript), run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 # figure 1
 plot(NE_Lakes, formula = ~ ELEV_CAT + ELEV_CAT:AREA_CAT, key.width = lcm(3))
 
@@ -131,14 +131,14 @@ plot(NE_Lakes, formula = ~ ELEV_CAT + ELEV_CAT:AREA_CAT, key.width = lcm(3))
 #' 
 #' To summarize lake elevation by area category, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 summary(NE_Lakes, formula = ELEV ~ AREA_CAT)
 
 #' 
 #' 
 #' To visualize lake elevation by area category, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 # output not shown in manuscript
 plot(NE_Lakes, formula = ELEV ~ AREA_CAT)
 
@@ -148,7 +148,7 @@ plot(NE_Lakes, formula = ELEV ~ AREA_CAT)
 #' 
 #' For a visual representation of the GRTS algorithm (figure 2 in the manuscript), run
 #' 
-## ----fig.show = "hold", out.width = "50%"-------------------------------------------------------------------------------------------
+## ----fig.show = "hold", out.width = "50%"--------------------------------------------------------
 # figure 2
 
 
@@ -180,7 +180,7 @@ q38 <- 3 / 8
 q58 <- 5 / 8
 q78 <- 7 / 8
 
-## figure 2a
+# figure 2a     ----------------------------------------------------------------
 annotate_size <- 30
 grts_level1 <- ggplot() +
   geom_path(scaled_oregon_data, mapping = aes(x = long, y = lat), col = "black") +
@@ -203,7 +203,7 @@ grts_level1 <- ggplot() +
 
 grts_level1
 
-## figure 2b
+## figure 2b     ----------------------------------------------------------------
 annotate_size <- 15
 grts_level2 <- ggplot() +
   geom_path(scaled_oregon_data, mapping = aes(x = long, y = lat), col = "black") +
@@ -244,9 +244,10 @@ grts_level2 <- ggplot() +
         panel.grid = element_blank(),
         panel.background = element_blank())
 
+
 grts_level2
 
-## figure 2c
+# figure 2c --------------------------------------------------------------------
 x <- seq(0, n_samp, length.out = 100)
 yht <- 0.4
 ysep <- 0.1
@@ -278,12 +279,17 @@ grts_line <- ggplot() +
   scale_shape_manual(values = c(19, 17, 3)) +
   expand_limits(y = c(0, 1)) +
   labs(x = "") +
+  # dashed lines from bottom to one-d line
+  # geom_segment(aes(x = 0 * high, xend = 0 * high, y = low, yend = yht), linetype = "dashed", col = "black") +
+  # geom_segment(aes(x = 1 * high, xend = 1 * high, y = low, yend = yht), linetype = "dashed", col = "black") +
+  # geom_segment(aes(x = 2 * high, xend = 2 * high, y = low, yend = yht), linetype = "dashed", col = "black") +
+  # geom_segment(aes(x = 3 * high, xend = 3 * high, y = low, yend = yht), linetype = "dashed", col = "black") +
   # first inclusion prob
   geom_segment(aes(x = 0, xend = 0, y = yht + ysep, yend = yht + ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
   geom_segment(aes(x = xprobs[1], xend = xprobs[1], y = yht + ysep, yend = yht + ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
   geom_segment(aes(x = 0, xend = xprobs[1], y = yht + ysep + yeps, yend = yht + ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
   geom_segment(aes(x = mean(c(0, xprobs[1])), xend = mean(c(0, xprobs[1])), y = yht + ysep + yeps, yend = yht + 1.5 * ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
-  annotate(geom = "text", x = mean(c(0, xprobs[1])), y = yht + 2 * ysep + yeps, label = "03", col = "black", size = an_size) +
+  annotate(geom = "text", x = mean(c(0, xprobs[1])), y = yht + 2 * ysep + yeps, label = "02", col = "black", size = an_size) +
   # second inclusion prob
   geom_segment(aes(x = xprobs[1], xend = xprobs[1], y = yht + ysep, yend = yht + ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
   geom_segment(aes(x = xprobs[2], xend = xprobs[2], y = yht + ysep, yend = yht + ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
@@ -307,15 +313,20 @@ grts_line <- ggplot() +
   geom_segment(aes(x = xprobs[5], xend = xprobs[5], y = yht + ysep, yend = yht + ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
   geom_segment(aes(x = xprobs[4], xend = xprobs[5], y = yht + ysep + yeps, yend = yht + ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
   geom_segment(aes(x = mean(c(xprobs[4], xprobs[5])), xend = mean(c(xprobs[4], xprobs[5])), y = yht + ysep + yeps, yend = yht + 1.5 * ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
-  annotate(geom = "text", x = mean(c(xprobs[4], xprobs[5])), y = yht + 2 * ysep + yeps, label = "32", col = "black", size = an_size) +
+  annotate(geom = "text", x = mean(c(xprobs[4], xprobs[5])), y = yht + 2 * ysep + yeps, label = "33", col = "black", size = an_size) +
   # uniform points
-    annotate(geom = "text", x = 0.9, y = yht - 3 * ysep, label = "paste(u[1])", parse = TRUE, size = an_size) +
+  annotate(geom = "text", x = 0.9, y = yht - 3 * ysep, label = expression(u[1]), size = an_size) +
   geom_segment(aes(x = 0.9, xend = 0.9, y = yht - 2.25 * ysep, yend = yht), linetype = "solid", col = "black", size = ls_size) +
-  annotate(geom = "text", x = 1 + 0.9, y = yht - 3 * ysep, label =  "paste(u[2])", parse = TRUE, size = an_size) +
+  annotate(geom = "text", x = 1 + 0.9, y = yht - 3 * ysep, label = expression(u[2]), size = an_size) +
   geom_segment(aes(x = 1 + 0.9, xend = 1 + 0.9, y = yht - 2.25 * ysep, yend = yht), linetype = "solid", col = "black", size = ls_size) +
-  annotate(geom = "text", x = 2 + 0.9, y = yht - 3 * ysep, label = "paste(u[3])", parse = TRUE, size = an_size) +
+  annotate(geom = "text", x = 2 + 0.9, y = yht - 3 * ysep, label = expression(u[3]), size = an_size) +
   geom_segment(aes(x = 2 + 0.9, xend = 2 + 0.9, y = yht - 2.25 * ysep, yend = yht), linetype = "solid", col = "black", size = ls_size) +
-theme(axis.text.x = element_text(size = 25, face = "bold", color = "black"),
+  # lines to above points
+  # geom_segment(aes(x = 0.9, xend = 0.9, y = 0.42, yend = yht + ysep + yeps), linetype = "dotted", col = "black", size = 1.1) +
+  # geom_segment(aes(x = 1 + 0.9, xend = 1 + 0.9, y = 0.42, yend = yht + ysep + yeps), linetype = "dotted", col = "black", size = 1.1) +
+  # geom_segment(aes(x = 2 + 0.9, xend = 2 + 0.9, y = 0.42, yend = yht + ysep + yeps), linetype = "dotted", col = "black", size = 1.1) +
+  # theme
+  theme(axis.text.x = element_text(size = 25, face = "bold", color = "black"),
         axis.title.x = element_text(size = 25, face = "bold", color = "black"),
         axis.text.y = element_blank(),
         axis.title.y = element_blank(),
@@ -329,13 +340,13 @@ theme(axis.text.x = element_text(size = 25, face = "bold", color = "black"),
 
 grts_line
 
-## figure 2d
+# figure 2d            ---------------------------------------------------------
 population_data$`Site` <-   c(
-  "Not Selected",
+  "Selected",
+  "Selected",
   "Selected",
   "Not Selected",
-  "Selected",
-  "Selected"
+  "Not Selected"
 )
 grts_sample <- ggplot() +
   geom_path(oregon_data, mapping = aes(x = long, y = lat), col = "black") +
@@ -357,14 +368,14 @@ grts_sample
 #' 
 #' To select an equal probability GRTS sample of size 50, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 eqprob <- grts(NE_Lakes, n_base = 50)
 
 #' 
 #' 
 #' To select a stratified GRTS sample with 35 lakes in the low elevation category and 15 lakes in the high elevation category, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 n_strata <- c(low = 35, high = 15)
 eqprob_strat <- grts(
   NE_Lakes,
@@ -376,7 +387,7 @@ eqprob_strat <- grts(
 #' 
 #' To select an unequal probability GRTS sample of size 50 with 10 expected lakes in the small area category and 40 expected lakes in the large area category, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 caty_n <- c(small = 10, large = 40)
 uneqprob <- grts(
   NE_Lakes,
@@ -389,7 +400,7 @@ uneqprob <- grts(
 #' 
 #' To select a proportional probability (to lake area) GRTS sample of size 50
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 propprob <- grts(
   NE_Lakes,
   n_base = 50,
@@ -402,7 +413,7 @@ propprob <- grts(
 #' 
 #' To select an equal probability GRTS sample of size 50 that incorporates the five legacy sites in `NE_Lakes_Legacy`, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 eqprob_legacy <- grts(
   NE_Lakes,
   n_base = 50,
@@ -415,7 +426,7 @@ eqprob_legacy <- grts(
 #' 
 #' To select an equal probability GRTS sample of size 50 with a minimum distance requirement of 1600 meters, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 min_d <- grts(NE_Lakes, n_base = 50, mindis = 1600)
 
 #' 
@@ -424,14 +435,14 @@ min_d <- grts(NE_Lakes, n_base = 50, mindis = 1600)
 #' 
 #' To select an equal probability GRTS sample of size 50 with 10 reverse hierarchically ordered replacement sites, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 eqprob_rho <- grts(NE_Lakes, n_base = 50, n_over = 10)
 
 #' 
 #' 
 #' To select an equal probability GRTS sample of size 50 with 2 nearest neighbor replacement sites (for each base site), run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 eqprob_nn <- grts(NE_Lakes, n_base = 50, n_near = 2)
 
 #' 
@@ -440,7 +451,7 @@ eqprob_nn <- grts(NE_Lakes, n_base = 50, n_near = 2)
 #' 
 #' To visualize `eqprob_rho` (figure 3a in the manuscript), run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 # figure 3a
 plot(eqprob_rho, key.width = lcm(3))
 
@@ -448,7 +459,7 @@ plot(eqprob_rho, key.width = lcm(3))
 #' 
 #' To visualize `eqprob_rho` for only the base sites (figure 3b in the manuscript), run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 # figure 3b
 plot(eqprob_rho, siteuse = "Base", key.width = lcm(3))
 
@@ -456,14 +467,14 @@ plot(eqprob_rho, siteuse = "Base", key.width = lcm(3))
 #' 
 #' To summarize the design sites by elevation category, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 summary(eqprob_rho, formula = siteuse ~ ELEV_CAT)
 
 #' 
 #' 
 #' To visualize the design sites by elevation category, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 # output not shown in manuscript
 plot(eqprob_rho, formula = siteuse ~ ELEV_CAT, key.width = lcm(3))
 
@@ -471,14 +482,14 @@ plot(eqprob_rho, formula = siteuse ~ ELEV_CAT, key.width = lcm(3))
 #' 
 #' To summarize lake area by the design site categories, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 summary(eqprob_rho, formula = AREA ~ siteuse)
 
 #' 
 #' 
 #' To visualize lake area by the design site categories, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 # output not shown in manuscript
 plot(eqprob_rho, formula = AREA ~ siteuse)
 
@@ -486,7 +497,7 @@ plot(eqprob_rho, formula = AREA ~ siteuse)
 #' 
 #' To bind the design sites together, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 sites_bind <- sp_rbind(eqprob_rho)
 
 #' 
@@ -495,7 +506,7 @@ sites_bind <- sp_rbind(eqprob_rho)
 #' 
 #' To print a design stratified by lake elevation category with legacy sites, reverse hierarchically ordered replacement sites, and nearest neighbor replacement sites, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 n_strata <- c(low = 10, high = 10)
 n_over_strata <- c(low = 2, high = 5)
 print(grts(
@@ -513,14 +524,14 @@ print(grts(
 #' 
 #' To compute the spatial balance of the design sites in `eqprob`, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 sp_balance(eqprob$sites_base, NE_Lakes) # grts
 
 #' 
 #' 
 #' To select an equal probability IRS sample of size 50, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 set.seed(5) # resetting seed to match results in the manuscript
 eqprob_irs <- irs(NE_Lakes, n_base = 50)
 
@@ -528,7 +539,7 @@ eqprob_irs <- irs(NE_Lakes, n_base = 50)
 #' 
 #' To compute the spatial balance of the design sites in `eqprob_irs`, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 sp_balance(eqprob_irs$sites_base, NE_Lakes) # irs
 
 #' 
@@ -536,14 +547,14 @@ sp_balance(eqprob_irs$sites_base, NE_Lakes) # irs
 #' 
 #' To select and visualize an equal probability GRTS sample of size 25 from `Illinois_River`, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 set.seed(5)
 eqprob_illinois <- grts(Illinois_River, n_base = 25)
 plot(eqprob_illinois, sframe = Illinois_River, pch = 19, key.pos = 4, key.width = lcm(3.2))
 
 #' 
 #' To select and visualize an equal probability GRTS sample of size 25 from `Lake_Ontario`, run
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 set.seed(5)
 eqprob_ontario <- grts(Lake_Ontario, n_base = 40)
 plot(eqprob_ontario, sframe = Lake_Ontario, pch = 19, key.pos = 4, key.width = lcm(3.2))
@@ -555,14 +566,14 @@ plot(eqprob_ontario, sframe = Lake_Ontario, pch = 19, key.pos = 4, key.width = l
 #' 
 #' To load `NLA_PNW` into your global environment (this data set is in the supplementary R package, not spsurvey), run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 data("NLA_PNW")
 
 #' 
 #' 
 #' To analyze nitrogen condition, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 nitr <- cat_analysis(
   NLA_PNW,
   vars = "NITR_COND",
@@ -573,21 +584,21 @@ nitr <- cat_analysis(
 #' 
 #' To print a subset of the proportion output, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 subset(nitr, select = c(Category, nResp, Estimate.P, LCB95Pct.P, UCB95Pct.P))
 
 #' 
 #' 
 #' To print a subset of the total (`.U` stands for "total units") output, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 subset(nitr, select = c(Category, nResp, Estimate.U, LCB95Pct.U, UCB95Pct.U))
 
 #' 
 #' 
 #' To analyze nitrogen condition separately for each state, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 nitr_subpop <- cat_analysis(
   NLA_PNW,
   vars = "NITR_COND",
@@ -599,7 +610,7 @@ nitr_subpop <- cat_analysis(
 #' 
 #' To print a subset of the total output for Oregon lakes, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 subset(
   nitr_subpop,
   subset = Subpopulation == "Oregon",
@@ -610,7 +621,7 @@ subset(
 #' 
 #' To analyze nitrogen category stratified by urban category, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 nitr_strat <- cat_analysis(
   NLA_PNW,
   vars = "NITR_COND",
@@ -622,7 +633,7 @@ nitr_strat <- cat_analysis(
 #' 
 #' To analyze nitrogen category separately for each state and stratified by urban category, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 nitr_strat_subpop <- cat_analysis(
   NLA_PNW,
   vars = "NITR_COND",
@@ -637,7 +648,7 @@ nitr_strat_subpop <- cat_analysis(
 #' 
 #' To analyze BMMI, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 bmmi <- cont_analysis(
   NLA_PNW,
   vars = "BMMI",
@@ -648,14 +659,14 @@ bmmi <- cont_analysis(
 #' 
 #' To print a subset of the mean output, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 subset(bmmi$Mean, select = c(Indicator, nResp, Estimate, LCB95Pct, UCB95Pct))
 
 #' 
 #' 
 #' To visualize the cumulative distribution function (figure 4 in the manuscript), run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 # figure 4
 plot(bmmi$CDF)
 
@@ -663,7 +674,7 @@ plot(bmmi$CDF)
 #' 
 #' To analyze BMMI separately for each state, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 bmmi_state <- cont_analysis(
   NLA_PNW,
   vars = "BMMI",
@@ -675,7 +686,7 @@ bmmi_state <- cont_analysis(
 #' 
 #' To print mean output for each state, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 subset(
   bmmi_state$Mean,
   select = c(Subpopulation, Indicator, nResp, Estimate, LCB95Pct, UCB95Pct)
@@ -685,7 +696,7 @@ subset(
 #' 
 #' To analyze BMMI stratified by urban category, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 bmmi_strat <-  cont_analysis(
   NLA_PNW,
   vars = "BMMI",
@@ -697,7 +708,7 @@ bmmi_strat <-  cont_analysis(
 #' 
 #' To analyze BMMI separately for each state and stratified by urban category, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 bmmi_strat_state <-  cont_analysis(
   NLA_PNW,
   vars = "BMMI",
@@ -714,37 +725,37 @@ bmmi_strat_state <-  cont_analysis(
 #' 
 #' # Application
 #' 
-#' To load `NLA12` from the DumelleEtAl2021spsurvey supplementary R package into your global environment, run
+#' To load `NLA12` from the spsurvey.manuscript supplementary R package into your global environment, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 data("NLA12")
 
 #' 
 #' 
 #' To turn `NLA12` into an `sp_frame` object, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 NLA12 <- sp_frame(NLA12)
 
 #' 
 #' 
 #' To summarize Atrazine presence and BMMI, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 summary(NLA12, formula = ~ AP + BMMI)
 
 #' 
 #' 
 #' To visualize Atrazine presence and BMMI (figure 5), run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 plot(NLA12, formula = ~ AP + BMMI, key.width = lcm(3))
 
 #' 
 #' 
 #' To store the function that performs a simulation trial, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 # write function
 perform_sim <- function(seed, data, variable, sample_size, cat, ...) {
 
@@ -887,7 +898,7 @@ perform_sim <- function(seed, data, variable, sample_size, cat, ...) {
 #' 
 #' WARNING Running all simulation trials in parallel may take 10 - 60 minutes. Results can instead be loaded by using `readRDS()` on the `.Rdata` files included alongside the resubmission or by running (after removing comments)
 #' 
-## ----eval = FALSE-------------------------------------------------------------------------------------------------------------------
+## ----eval = FALSE--------------------------------------------------------------------------------
 ## ## data("cat_results") # categorical variable results (Atrazine)
 ## ## data("cat_summaries") # categorical variable summaries (Atrazine)
 ## ## data("cont_results") # continuous variable results (BMMI)
@@ -901,7 +912,7 @@ perform_sim <- function(seed, data, variable, sample_size, cat, ...) {
 #' 
 #' To perform the 2000 simulation trials in parallel, run
 #' 
-## ----results = "hide"---------------------------------------------------------------------------------------------------------------
+## ----results = "hide"----------------------------------------------------------------------------
 # find cores and set cluster
 n_clusters <- detectCores()
 cluster <- makeCluster(n_clusters)
@@ -929,7 +940,7 @@ stopCluster(cluster)
 #' 
 #' To compute the Atrazine presence summary, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 cat_summaries <- cat_results %>%
     group_by(algorithm) %>%
     summarize(
@@ -944,7 +955,7 @@ cat_summaries <- cat_results %>%
 #' 
 #' To view the Atrazine presence summary, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 cat_summaries %>%
   as.data.frame() %>%
   print()
@@ -953,7 +964,7 @@ cat_summaries %>%
 #' 
 #' To generate a LaTeX table from the Atrazine presence summary (table 1 in the manuscript), run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 names(cat_summaries) <- c("Algorithm", "Bias", "Std. Err.", "RMSE", "Coverage", "SPB")
 alpha <- 0.05
 cat_summaries$MOE <- qnorm(1 - alpha / 2) * cat_summaries$`Std. Err.`
@@ -965,7 +976,7 @@ print(cat_summaries_table, include.rownames = FALSE, comment = FALSE)
 #' 
 #' To view the Atrazine presence spatial balance values (figure 6a in the manuscript), run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 ggplot(cat_results, mapping = aes(x = algorithm, y = spb)) +
   geom_boxplot() +
   labs(x = "Algorithm", y = "Spatial Balance") +
@@ -975,7 +986,7 @@ ggplot(cat_results, mapping = aes(x = algorithm, y = spb)) +
 #' 
 #' To view the Atrazine presence margin of error values (figure 6b in the manuscript), run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 ggplot(cat_results, mapping = aes(x = algorithm, y = 1.96 * StdError.P)) +
   geom_boxplot() +
   labs(x = "Algorithm (Variance Estimator)", y = "Margin of Error") +
@@ -986,7 +997,7 @@ ggplot(cat_results, mapping = aes(x = algorithm, y = 1.96 * StdError.P)) +
 #' 
 #' To compute the BMMI summary, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 cont_summaries <- cont_results %>%
   group_by(algorithm) %>%
   summarize(
@@ -1001,7 +1012,7 @@ cont_summaries <- cont_results %>%
 #' 
 #' To view the BMMI summary, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 cont_summaries %>%
   as.data.frame() %>%
   print()
@@ -1010,7 +1021,7 @@ cont_summaries %>%
 #' 
 #' To generate a LaTeX table from the BMMI summary (table 2 in the manuscript), run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 names(cont_summaries) <- c("Algorithm", "Bias", "Std. Err.", "RMSE", "Coverage", "SPB")
 alpha <- 0.05
 cont_summaries$MOE <- qnorm(1 - alpha / 2) * cont_summaries$`Std. Err.`
@@ -1022,7 +1033,7 @@ print(cont_summaries_table, include.rownames = FALSE, comment = FALSE)
 #' 
 #' To view the BMMI spatial balance values (figure 7a in the manuscript), run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 ggplot(cont_results, mapping = aes(x = algorithm, y = spb)) +
   geom_boxplot() +
   labs(x = "Algorithm", y = "Spatial Balance") +
@@ -1032,7 +1043,7 @@ ggplot(cont_results, mapping = aes(x = algorithm, y = spb)) +
 #' 
 #' To view the BMMI margin of error values, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 ggplot(cont_results, mapping = aes(x = algorithm, y = 1.96 * StdError)) +
   geom_boxplot() +
   labs(x = "Algorithm (Variance Estimator)", y = "Margin of Error") +
@@ -1049,7 +1060,7 @@ ggplot(cont_results, mapping = aes(x = algorithm, y = 1.96 * StdError)) +
 #' 
 #' To view the session information used to compile this document, run
 #' 
-## -----------------------------------------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------
 sessionInfo()
 
 #' 

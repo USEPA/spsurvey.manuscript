@@ -37,21 +37,21 @@ Data and scripts used to create the manuscript itself are available in a supplem
 
 
 ```r
-## remotes::install_github("michaeldumelle/DumelleEtAl2021spsurvey", ref = "main", dependencies = TRUE)
+## remotes::install_github("USEPA/spsurvey.manuscript", ref = "main", dependencies = TRUE)
 ```
 
-The supplementary R package must be installed before proceeding with the Section 4 (Application) of the replication script. Instructions for using and finding files in the supplementary R package are available in the `README` of the package's GitHub repository: [https://github.com/michaeldumelle/DumelleEtAl2021spsurvey](https://github.com/michaeldumelle/DumelleEtAl2021spsurvey). It is recommended read the `README` before proceeding with this file, as the `README` contains some useful contextual information. Note that some of the images used in the manuscript underwent minor adjustments to code presented here in order to use high-quality, publication-ready figures in the manuscript. The code used to generate these higher-quality images is available after downloading the supplementary package. The code used to generate lower-quality images is provided in this document.
+The supplementary R package must be installed before proceeding with the Section 4 (Application) of the replication script. Instructions for using and finding files in the supplementary R package are available in the `README` of the package's GitHub repository: [https://github.com/USEPA/spsurvey.manuscript](https://github.com/USEPA/spsurvey.manuscript). It is recommended read the `README` before proceeding with this file, as the `README` contains some useful contextual information. Note that some of the images used in the manuscript underwent minor adjustments to code presented here in order to use high-quality, publication-ready figures in the manuscript. The code used to generate these higher-quality images is available after downloading the supplementary package. The code used to generate lower-quality images is provided in this document.
 
-This document can be viewed without requiring you save and knit it by visiting a pre-knitted Markdown file located in the supplementary package's GitHub repository at [https://github.com/michaeldumelle/DumelleEtAl2021spsurvey/blob/main/inst/scripts/replication/code.md](https://github.com/michaeldumelle/DumelleEtAl2021spsurvey/blob/main/inst/scripts/replication/code.md). This is helpful in the event that some version discrepancy prevents you from compiling the document.
+This document can be viewed without requiring you save and knit it by visiting a pre-knitted Markdown file located in the supplementary package's GitHub repository at [https://github.com/USEPA/spsurvey.manuscript/blob/main/inst/scripts/replication/code.md](https://github.com/USEPA/spsurvey.manuscript/blob/main/inst/scripts/replication/code.md). This is helpful in the event that some version discrepancy prevents you from compiling the document.
 
-Before proceeding, load spsurvey and the packages installed alongside the DumelleEtAl2021spsurvey package.
+Before proceeding, load spsurvey and the packages installed alongside the spsurvey.manuscript package.
 
 
 ```r
 library("spsurvey")
 library("cowplot")
 library("dplyr")
-library("DumelleEtAl2021spsurvey")
+library("spsurvey.manuscript")
 library("ggplot2")
 library("knitr")
 library("maps")
@@ -215,7 +215,7 @@ q38 <- 3 / 8
 q58 <- 5 / 8
 q78 <- 7 / 8
 
-## figure 2a
+# figure 2a     ----------------------------------------------------------------
 annotate_size <- 30
 grts_level1 <- ggplot() +
   geom_path(scaled_oregon_data, mapping = aes(x = long, y = lat), col = "black") +
@@ -238,7 +238,7 @@ grts_level1 <- ggplot() +
 
 grts_level1
 
-## figure 2b
+## figure 2b     ----------------------------------------------------------------
 annotate_size <- 15
 grts_level2 <- ggplot() +
   geom_path(scaled_oregon_data, mapping = aes(x = long, y = lat), col = "black") +
@@ -279,9 +279,10 @@ grts_level2 <- ggplot() +
         panel.grid = element_blank(),
         panel.background = element_blank())
 
+
 grts_level2
 
-## figure 2c
+# figure 2c --------------------------------------------------------------------
 x <- seq(0, n_samp, length.out = 100)
 yht <- 0.4
 ysep <- 0.1
@@ -313,12 +314,17 @@ grts_line <- ggplot() +
   scale_shape_manual(values = c(19, 17, 3)) +
   expand_limits(y = c(0, 1)) +
   labs(x = "") +
+  # dashed lines from bottom to one-d line
+  # geom_segment(aes(x = 0 * high, xend = 0 * high, y = low, yend = yht), linetype = "dashed", col = "black") +
+  # geom_segment(aes(x = 1 * high, xend = 1 * high, y = low, yend = yht), linetype = "dashed", col = "black") +
+  # geom_segment(aes(x = 2 * high, xend = 2 * high, y = low, yend = yht), linetype = "dashed", col = "black") +
+  # geom_segment(aes(x = 3 * high, xend = 3 * high, y = low, yend = yht), linetype = "dashed", col = "black") +
   # first inclusion prob
   geom_segment(aes(x = 0, xend = 0, y = yht + ysep, yend = yht + ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
   geom_segment(aes(x = xprobs[1], xend = xprobs[1], y = yht + ysep, yend = yht + ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
   geom_segment(aes(x = 0, xend = xprobs[1], y = yht + ysep + yeps, yend = yht + ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
   geom_segment(aes(x = mean(c(0, xprobs[1])), xend = mean(c(0, xprobs[1])), y = yht + ysep + yeps, yend = yht + 1.5 * ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
-  annotate(geom = "text", x = mean(c(0, xprobs[1])), y = yht + 2 * ysep + yeps, label = "03", col = "black", size = an_size) +
+  annotate(geom = "text", x = mean(c(0, xprobs[1])), y = yht + 2 * ysep + yeps, label = "02", col = "black", size = an_size) +
   # second inclusion prob
   geom_segment(aes(x = xprobs[1], xend = xprobs[1], y = yht + ysep, yend = yht + ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
   geom_segment(aes(x = xprobs[2], xend = xprobs[2], y = yht + ysep, yend = yht + ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
@@ -342,15 +348,20 @@ grts_line <- ggplot() +
   geom_segment(aes(x = xprobs[5], xend = xprobs[5], y = yht + ysep, yend = yht + ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
   geom_segment(aes(x = xprobs[4], xend = xprobs[5], y = yht + ysep + yeps, yend = yht + ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
   geom_segment(aes(x = mean(c(xprobs[4], xprobs[5])), xend = mean(c(xprobs[4], xprobs[5])), y = yht + ysep + yeps, yend = yht + 1.5 * ysep + yeps), linetype = "solid", col = "black", size = ls_size) +
-  annotate(geom = "text", x = mean(c(xprobs[4], xprobs[5])), y = yht + 2 * ysep + yeps, label = "32", col = "black", size = an_size) +
+  annotate(geom = "text", x = mean(c(xprobs[4], xprobs[5])), y = yht + 2 * ysep + yeps, label = "33", col = "black", size = an_size) +
   # uniform points
-    annotate(geom = "text", x = 0.9, y = yht - 3 * ysep, label = "paste(u[1])", parse = TRUE, size = an_size) +
+  annotate(geom = "text", x = 0.9, y = yht - 3 * ysep, label = expression(u[1]), size = an_size) +
   geom_segment(aes(x = 0.9, xend = 0.9, y = yht - 2.25 * ysep, yend = yht), linetype = "solid", col = "black", size = ls_size) +
-  annotate(geom = "text", x = 1 + 0.9, y = yht - 3 * ysep, label =  "paste(u[2])", parse = TRUE, size = an_size) +
+  annotate(geom = "text", x = 1 + 0.9, y = yht - 3 * ysep, label = expression(u[2]), size = an_size) +
   geom_segment(aes(x = 1 + 0.9, xend = 1 + 0.9, y = yht - 2.25 * ysep, yend = yht), linetype = "solid", col = "black", size = ls_size) +
-  annotate(geom = "text", x = 2 + 0.9, y = yht - 3 * ysep, label = "paste(u[3])", parse = TRUE, size = an_size) +
+  annotate(geom = "text", x = 2 + 0.9, y = yht - 3 * ysep, label = expression(u[3]), size = an_size) +
   geom_segment(aes(x = 2 + 0.9, xend = 2 + 0.9, y = yht - 2.25 * ysep, yend = yht), linetype = "solid", col = "black", size = ls_size) +
-theme(axis.text.x = element_text(size = 25, face = "bold", color = "black"),
+  # lines to above points
+  # geom_segment(aes(x = 0.9, xend = 0.9, y = 0.42, yend = yht + ysep + yeps), linetype = "dotted", col = "black", size = 1.1) +
+  # geom_segment(aes(x = 1 + 0.9, xend = 1 + 0.9, y = 0.42, yend = yht + ysep + yeps), linetype = "dotted", col = "black", size = 1.1) +
+  # geom_segment(aes(x = 2 + 0.9, xend = 2 + 0.9, y = 0.42, yend = yht + ysep + yeps), linetype = "dotted", col = "black", size = 1.1) +
+  # theme
+  theme(axis.text.x = element_text(size = 25, face = "bold", color = "black"),
         axis.title.x = element_text(size = 25, face = "bold", color = "black"),
         axis.text.y = element_blank(),
         axis.title.y = element_blank(),
@@ -363,14 +374,27 @@ theme(axis.text.x = element_text(size = 25, face = "bold", color = "black"),
         legend.position = c(0.5, 0.85))
 
 grts_line
+```
 
-## figure 2d
+```
+#> Warning in is.na(x): is.na() applied to non-(list or vector) of type
+#> 'expression'
+
+#> Warning in is.na(x): is.na() applied to non-(list or vector) of type
+#> 'expression'
+
+#> Warning in is.na(x): is.na() applied to non-(list or vector) of type
+#> 'expression'
+```
+
+```r
+# figure 2d            ---------------------------------------------------------
 population_data$`Site` <-   c(
-  "Not Selected",
+  "Selected",
+  "Selected",
   "Selected",
   "Not Selected",
-  "Selected",
-  "Selected"
+  "Not Selected"
 )
 grts_sample <- ggplot() +
   geom_path(oregon_data, mapping = aes(x = long, y = lat), col = "black") +
@@ -882,7 +906,7 @@ There was no code in this section.
 
 # Application
 
-To load `NLA12` from the DumelleEtAl2021spsurvey supplementary R package into your global environment, run
+To load `NLA12` from the spsurvey.manuscript supplementary R package into your global environment, run
 
 
 ```r
@@ -1299,7 +1323,7 @@ sessionInfo()
 ```
 
 ```
-#> R version 4.0.3 (2020-10-10)
+#> R version 4.1.1 (2021-08-10)
 #> Platform: x86_64-w64-mingw32/x64 (64-bit)
 #> Running under: Windows 10 x64 (build 19042)
 #> 
@@ -1317,31 +1341,30 @@ sessionInfo()
 #> [8] methods   base     
 #> 
 #> other attached packages:
-#>  [1] xtable_1.8-4                       rmarkdown_2.13                    
-#>  [3] maps_3.4.0                         knitr_1.36                        
-#>  [5] ggplot2_3.3.5                      DumelleEtAl2021spsurvey_0.0.0.9000
-#>  [7] dplyr_1.0.5                        cowplot_1.1.1                     
-#>  [9] spsurvey_5.4.0                     survey_4.2                        
-#> [11] survival_3.2-7                     Matrix_1.2-18                     
-#> [13] sf_1.0-1                          
+#>  [1] xtable_1.8-4                   rmarkdown_2.16                
+#>  [3] maps_3.4.0                     knitr_1.38                    
+#>  [5] ggplot2_3.3.5                  spsurvey.manuscript_0.0.0.9000
+#>  [7] dplyr_1.0.8                    cowplot_1.1.1                 
+#>  [9] spsurvey_5.4.0                 survey_4.1-1                  
+#> [11] survival_3.3-1                 Matrix_1.4-1                  
+#> [13] sf_1.0-7                      
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] Rcpp_1.0.7         lattice_0.20-41    deldir_1.0-0       class_7.3-17      
-#>  [5] gtools_3.8.2       assertthat_0.2.1   digest_0.6.27      utf8_1.2.1        
-#>  [9] R6_2.5.1           AlgDesign_1.2.0    evaluate_0.14      e1071_1.7-6       
-#> [13] highr_0.9          pillar_1.6.1       rlang_1.0.2        rstudioapi_0.13   
-#> [17] minqa_1.2.4        jquerylib_0.1.4    nloptr_1.2.2.2     labeling_0.4.2    
-#> [21] splines_4.0.3      lme4_1.1-27.1      stringr_1.4.0      munsell_0.5.0     
-#> [25] proxy_0.4-25       compiler_4.0.3     xfun_0.23          pkgconfig_2.0.3   
-#> [29] htmltools_0.5.2    mitools_2.4        tidyselect_1.1.1   tibble_3.1.2      
-#> [33] lpSolve_5.6.15     fansi_0.5.0        withr_2.5.0        crayon_1.4.1      
-#> [37] MASS_7.3-53        nlme_3.1-149       jsonlite_1.7.2     gtable_0.3.0      
-#> [41] lifecycle_1.0.0    DBI_1.1.1          magrittr_2.0.1     units_0.7-2       
-#> [45] scales_1.1.1       KernSmooth_2.23-17 cli_3.2.0          stringi_1.5.3     
-#> [49] cachem_1.0.4       farver_2.1.0       crossdes_1.1-1     bslib_0.4.0       
-#> [53] ellipsis_0.3.2     generics_0.1.0     vctrs_0.3.8        boot_1.3-25       
-#> [57] tools_4.0.3        glue_1.6.2         purrr_0.3.4        fastmap_1.1.0     
-#> [61] yaml_2.2.1         colorspace_2.0-1   sampling_2.9       classInt_0.4-3    
-#> [65] sass_0.4.0
+#>  [1] Rcpp_1.0.8.3       lattice_0.20-45    deldir_1.0-6       class_7.3-20      
+#>  [5] gtools_3.9.2       assertthat_0.2.1   digest_0.6.27      utf8_1.2.2        
+#>  [9] R6_2.5.1           AlgDesign_1.2.0    evaluate_0.15      e1071_1.7-9       
+#> [13] highr_0.9          pillar_1.7.0       rlang_1.0.2        rstudioapi_0.13   
+#> [17] minqa_1.2.4        jquerylib_0.1.4    nloptr_2.0.0       labeling_0.4.2    
+#> [21] splines_4.1.1      lme4_1.1-28        stringr_1.4.0      munsell_0.5.0     
+#> [25] proxy_0.4-26       compiler_4.1.1     xfun_0.30          pkgconfig_2.0.3   
+#> [29] htmltools_0.5.2    mitools_2.4        tidyselect_1.1.2   tibble_3.1.6      
+#> [33] lpSolve_5.6.15     fansi_1.0.3        withr_2.5.0        crayon_1.5.1      
+#> [37] MASS_7.3-56        nlme_3.1-157       jsonlite_1.8.0     gtable_0.3.0      
+#> [41] lifecycle_1.0.1    DBI_1.1.2          magrittr_2.0.3     units_0.8-0       
+#> [45] scales_1.1.1       KernSmooth_2.23-20 cli_3.2.0          stringi_1.7.6     
+#> [49] farver_2.1.0       crossdes_1.1-2     bslib_0.3.1        ellipsis_0.3.2    
+#> [53] generics_0.1.2     vctrs_0.4.0        boot_1.3-28        tools_4.1.1       
+#> [57] glue_1.6.2         purrr_0.3.4        fastmap_1.1.0      yaml_2.3.5        
+#> [61] colorspace_2.0-3   sampling_2.9       classInt_0.4-3     sass_0.4.1
 ```
 
