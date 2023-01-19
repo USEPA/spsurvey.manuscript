@@ -1,4 +1,4 @@
-# DumelleEtAl2021spsurvey
+# spsurvey.manuscript
 
 ### A Supplementary R Package to to "spsurvey: spatial sampling design and analysis in R"
 
